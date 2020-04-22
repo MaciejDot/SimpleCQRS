@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleCQRSDotCore.Command
+namespace SimpleCQRS.Command
 {
     public class CommandDispatcher : ICommandDispatcher
     {
@@ -18,8 +18,8 @@ namespace SimpleCQRSDotCore.Command
 
         public Task Dispatch<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
         {
-            var handler = (ICommandHandler<TCommand>) _serviceProvider.GetService(_commandsAndHandlers[command.GetType().FullName]);
-            return handler.Handle(command, cancellationToken);
+            var handler = _serviceProvider.GetService(_commandsAndHandlers[command.GetType().FullName]) as dynamic;
+            return (Task) handler.Handle(command, cancellationToken);
         }
     }
 }

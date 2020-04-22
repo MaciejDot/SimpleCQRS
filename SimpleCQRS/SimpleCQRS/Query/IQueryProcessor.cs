@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleCQRSDotCore.Query
+namespace SimpleCQRS.Query
 {
     public interface IQueryProcessor
     {

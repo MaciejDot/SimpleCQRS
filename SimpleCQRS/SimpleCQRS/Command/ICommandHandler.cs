@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleCQRSDotCore.Command
+namespace SimpleCQRS.Command
 {
     public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {

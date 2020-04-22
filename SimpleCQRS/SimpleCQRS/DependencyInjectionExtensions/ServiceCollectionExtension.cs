@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SimpleCQRSDotCore.Command;
-using SimpleCQRSDotCore.Query;
+using SimpleCQRS.Command;
+using SimpleCQRS.Query;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace SimpleCQRSDotCore.DependencyInjectionExtensions
+namespace SimpleCQRS.DependencyInjectionExtensions
 {
     public static class ServiceCollectionExtension
     {

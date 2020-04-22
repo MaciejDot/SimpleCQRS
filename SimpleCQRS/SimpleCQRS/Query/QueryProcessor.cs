@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SimpleCQRSDotCore.Query
+namespace SimpleCQRS.Query
 {
     public class QueryProcessor : IQueryProcessor
     {
@@ -18,8 +18,8 @@ namespace SimpleCQRSDotCore.Query
 
         public Task<TResponse> Process<TResponse>(IQuery<TResponse> command, CancellationToken cancellationToken)
         {
-            var handler = (IQueryHandler<IQuery<TResponse>, TResponse>) _serviceProvider.GetService(_handlerTypes[command.GetType().FullName]);
-            return handler.Handle(command, cancellationToken);
+            var handler = _serviceProvider.GetService(_handlerTypes[command.GetType().FullName]) as dynamic;
+            return (Task<TResponse>) handler.Handle(command, cancellationToken);
         }
     }
 }

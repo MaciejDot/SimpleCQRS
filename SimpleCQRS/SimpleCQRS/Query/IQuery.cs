@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleCQRSDotCore.Query
+namespace SimpleCQRS.Query
 {
     public interface IQuery<out TResponse>
     {

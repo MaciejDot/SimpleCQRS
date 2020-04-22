@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SimpleCQRSDotCore.Command
+namespace SimpleCQRS.Command
 {
     public interface ICommandDispatcher
     {
