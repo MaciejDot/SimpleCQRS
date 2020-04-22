@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,8 +19,9 @@ namespace SimpleCQRS.Query
 
         public Task<TResponse> Process<TResponse>(IQuery<TResponse> command, CancellationToken cancellationToken)
         {
-            var handler = _serviceProvider.GetService(_handlerTypes[command.GetType().FullName]) as dynamic;
-            return (Task<TResponse>) handler.Handle(command, cancellationToken);
+            var handler = _serviceProvider.GetService(_handlerTypes[command.GetType().FullName]);
+            MethodInfo magicMethod = handler.GetType().GetMethod("Handle");
+            return (Task<TResponse>)magicMethod.Invoke(handler, new object[]{ command, cancellationToken});
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,8 +19,9 @@ namespace SimpleCQRS.Command
 
         public Task Dispatch<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
         {
-            var handler = _serviceProvider.GetService(_commandsAndHandlers[command.GetType().FullName]) as dynamic;
-            return (Task) handler.Handle(command, cancellationToken);
+            var handler = _serviceProvider.GetService(_commandsAndHandlers[command.GetType().FullName]);
+            MethodInfo magicMethod = handler.GetType().GetMethod("Handle");
+            return (Task)magicMethod.Invoke(handler, new object[] { command, cancellationToken });
         }
     }
 }
