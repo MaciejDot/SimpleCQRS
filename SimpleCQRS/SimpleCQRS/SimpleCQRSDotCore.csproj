@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>SimpleCQRSDotCore</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.2</Version>
     <Authors>MaciejDot</Authors>
     <license>MIT</license>
     <projectUrl>https://github.com/MaciejDot/SimpleCQRS</projectUrl>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
 
 </Project>

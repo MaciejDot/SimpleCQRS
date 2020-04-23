@@ -52,9 +52,9 @@ namespace SimpleCQRS.DependencyInjectionExtensions
                 .ToList()
                 .ForEach(a => services.AddTransient(a.Value, a.Value));
 
-            services.AddScoped<ICommandDispatcher>(serviceProvider => new CommandDispatcher(serviceProvider, commandHandlers));
+            services.AddSingleton<ICommandDispatcher>(serviceProvider => new CommandDispatcher(serviceProvider, commandHandlers));
 
-            services.AddScoped<IQueryProcessor>(serviceProvider => new QueryProcessor(serviceProvider, queryHandlers));
+            services.AddSingleton<IQueryProcessor>(serviceProvider => new QueryProcessor(serviceProvider, queryHandlers));
 
             return services;
         }

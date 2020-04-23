@@ -10,8 +10,8 @@ namespace SimpleCQRS.Query
     public class QueryProcessor : IQueryProcessor
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IDictionary<string, Type> _handlerTypes;
-        public QueryProcessor(IServiceProvider serviceProvider, IDictionary<string, Type> queriesCollection)
+        private readonly IReadOnlyDictionary<string, Type> _handlerTypes;
+        public QueryProcessor(IServiceProvider serviceProvider, IReadOnlyDictionary<string, Type> queriesCollection)
         {
             _serviceProvider = serviceProvider;
             _handlerTypes = queriesCollection;

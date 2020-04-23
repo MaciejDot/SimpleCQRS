@@ -10,8 +10,8 @@ namespace SimpleCQRS.Command
     public class CommandDispatcher : ICommandDispatcher
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly IDictionary<string, Type> _commandsAndHandlers;
-        public CommandDispatcher(IServiceProvider serviceProvider, IDictionary<string, Type> commandsCollection)
+        private readonly IReadOnlyDictionary<string, Type> _commandsAndHandlers;
+        public CommandDispatcher(IServiceProvider serviceProvider, IReadOnlyDictionary<string, Type> commandsCollection)
         {
             _serviceProvider = serviceProvider;
             _commandsAndHandlers = commandsCollection;
