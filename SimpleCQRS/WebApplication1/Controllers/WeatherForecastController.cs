@@ -44,7 +44,9 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            IQuery<Ans> xs = new Get1();
             _queryProcessor.Process(new Get1(), default);
+           
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

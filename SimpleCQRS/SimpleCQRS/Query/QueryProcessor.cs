@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleCQRSDotCore.Query.Internals;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -17,11 +18,13 @@ namespace SimpleCQRS.Query
             _handlerTypes = queriesCollection;
         }
 
-        public Task<TResponse> Process<TResponse>(IQuery<TResponse> command, CancellationToken cancellationToken)
+        public Task<TResponse> Process<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
         {
-            var handler = _serviceProvider.GetService(_handlerTypes[command.GetType().FullName]);
-            MethodInfo magicMethod = handler.GetType().GetMethod("Handle");
-            return (Task<TResponse>)magicMethod.Invoke(handler, new object[]{ command, cancellationToken});
+            var queryType = query.GetType();
+            var handler = _serviceProvider.GetService(_handlerTypes[queryType.FullName]);
+            var wrapper = (IWrapper<TResponse>)Activator.CreateInstance(typeof(Wrapper<,>).MakeGenericType(query.GetType(), typeof(TResponse)));
+            return wrapper.Handle(handler, query, cancellationToken);
         }
     }
+   
 }

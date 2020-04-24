@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>SimpleCQRSDotCore</PackageId>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <Authors>MaciejDot</Authors>
     <license>MIT</license>
     <projectUrl>https://github.com/MaciejDot/SimpleCQRS</projectUrl>

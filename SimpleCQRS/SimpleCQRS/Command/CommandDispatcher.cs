@@ -19,9 +19,8 @@ namespace SimpleCQRS.Command
 
         public Task Dispatch<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
         {
-            var handler = _serviceProvider.GetService(_commandsAndHandlers[command.GetType().FullName]);
-            MethodInfo magicMethod = handler.GetType().GetMethod("Handle");
-            return (Task)magicMethod.Invoke(handler, new object[] { command, cancellationToken });
+            var handler = (ICommandHandler<TCommand>)_serviceProvider.GetService(_commandsAndHandlers[typeof(TCommand).FullName]);
+            return (Task) handler.Handle(command, cancellationToken);
         }
     }
 }
